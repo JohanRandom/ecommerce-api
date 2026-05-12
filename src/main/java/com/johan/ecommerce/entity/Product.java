@@ -3,7 +3,7 @@ package com.johan.ecommerce.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import java.util.List;
  * Producto disponible en el catalogo, con precio, stock y descripcion.
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "products")
 @Data
 @NoArgsConstructor
@@ -36,8 +37,8 @@ public class Product {
     /**
      * Historial de lineas de orden que usaron este producto.
      */
-    @JsonIgnore
     @OneToMany(mappedBy = "product")
+    @JsonIgnoreProperties({"product", "order"})
     private List<OrderDetail> orderDetails;
 
     private String description;

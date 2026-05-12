@@ -2,7 +2,7 @@ package com.johan.ecommerce.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import java.util.List;
  * Compra realizada por un usuario, con total calculado y detalle de productos.
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "orders")
 @Data
 @NoArgsConstructor
@@ -33,7 +34,7 @@ public class Order {
     /**
      * Lineas de la orden; se guardan junto con la orden por CascadeType.ALL.
      */
-    @JsonIgnore
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"order", "product"})
     private List<OrderDetail> details;
 }
