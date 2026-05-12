@@ -38,7 +38,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
         response.setHeader(
                 "Access-Control-Allow-Headers",
-                "*"
+                "Authorization, Content-Type"
+        );
+
+        response.setHeader(
+                "Access-Control-Allow-Credentials",
+                "true"
         );
 
         if (request.getMethod().equals("OPTIONS")) {
