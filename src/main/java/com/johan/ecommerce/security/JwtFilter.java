@@ -26,6 +26,13 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        if (request.getMethod().equals("OPTIONS")) {
+
+            response.setStatus(HttpServletResponse.SC_OK);
+
+            return;
+        }
+
         String path = request.getRequestURI();
 
         // Rutas publicas que no requieren token.
