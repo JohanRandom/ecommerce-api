@@ -3,6 +3,7 @@ package com.johan.ecommerce.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Product {
     /**
      * Historial de lineas de orden que usaron este producto.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;
 

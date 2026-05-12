@@ -2,6 +2,7 @@ package com.johan.ecommerce.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class Order {
     /**
      * Lineas de la orden; se guardan junto con la orden por CascadeType.ALL.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> details;
 }
