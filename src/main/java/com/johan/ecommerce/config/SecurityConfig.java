@@ -20,7 +20,10 @@ public class SecurityConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://ecommerce-web-gamma-one.vercel.app"
+                        )
                         .allowedMethods(
                                 "GET",
                                 "POST",
