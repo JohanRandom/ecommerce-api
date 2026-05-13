@@ -2,7 +2,8 @@ package com.johan.ecommerce.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -26,10 +27,18 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        response.setHeader(
-                "Access-Control-Allow-Origin",
-                "http://localhost:5173"
-        );
+        String origin = request.getHeader("Origin");
+
+        if (
+                "http://localhost:5173".equals(origin) ||
+                "https://ecommerce-web-gamma-one.vercel.app".equals(origin)
+        ) {
+
+            response.setHeader(
+                    "Access-Control-Allow-Origin",
+                    origin
+            );
+        }
 
         response.setHeader(
                 "Access-Control-Allow-Methods",
