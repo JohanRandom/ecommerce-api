@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (
                 "http://localhost:5173".equals(origin) ||
-                "https://ecommerce-web-gamma-one.vercel.app".equals(origin)
+                        "https://ecommerce-web-gamma-one.vercel.app".equals(origin)
         ) {
 
             response.setHeader(
@@ -66,7 +66,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // Rutas publicas que no requieren token.
         if (
-                path.contains("/api/auth") || path.contains("/api/users") || path.contains("/api/products")) {
+                path.contains("/") || path.contains("/api/auth") || path.contains("/api/users") || path.contains("/api/products")) {
             filterChain.doFilter(request, response);
             return;
         }
