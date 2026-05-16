@@ -1,40 +1,75 @@
-# 🛒 E-commerce API
+# 🛒 API de E-commerce
 
-API REST desarrollada con **Spring Boot** que permite gestionar usuarios, productos y pedidos con autenticación segura mediante **JWT**.
+API REST desarrollada con **Spring Boot** para gestionar usuarios, productos y pedidos con autenticación segura mediante **JWT**.
 
 ---
 
-## 🚀 Demo
+## 🚀 Demo en vivo
 
-👉 https://ecommerce-api-ln7m.onrender.com
+🌐 URL base de la API:  
+https://ecommerce-api-ln7m.onrender.com
+
+### Verificación de estado
+
+```json
+{
+  "message": "E-commerce API is running successfully 🚀",
+  "status": "online"
+}
+```
 
 ---
 
 ## 🧰 Tecnologías utilizadas
 
-* Java 17
-* Spring Boot
-* Spring Data JPA
-* PostgreSQL (Supabase)
-* JWT (JSON Web Token)
-* BCrypt
-* Docker
-* Render (deploy)
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- PostgreSQL (Supabase)
+- Autenticación JWT
+- BCrypt
+- Docker
+- Render
 
 ---
 
 ## 🔐 Autenticación
 
-La API usa JWT para proteger endpoints.
+La API usa autenticación JWT para proteger los endpoints privados.
 
-### Login
+### Endpoint de inicio de sesión
 
-POST `/api/auth/login`
+```http
+POST /api/auth/login
+```
+
+### Cuerpo de la solicitud
 
 ```json
 {
-  "email": "usuario@email.com",
-  "password": "123456"
+  "email": "test@ecommerce.com",
+  "password": "test123"
+}
+```
+
+### Ejemplo de respuesta
+
+```json
+{
+  "token": "YOUR_JWT_TOKEN"
+}
+```
+
+---
+
+## 👤 Usuario de prueba
+
+Puedes probar la API usando esta cuenta de demostración:
+
+```json
+{
+  "email": "test@ecommerce.com",
+  "password": "test123"
 }
 ```
 
@@ -44,35 +79,58 @@ POST `/api/auth/login`
 
 ### 👤 Usuarios
 
-* POST `/api/users` → Crear usuario
+```http
+POST /api/users
+```
 
-### 🔐 Autenticación
-
-* POST `/api/auth/login` → Obtener token
-
-### 🛍️ Productos
-
-* POST `/api/products` → Crear producto
-
-### 📦 Pedidos
-
-* POST `/api/orders` → Crear pedido (requiere token)
+Crea un nuevo usuario.
 
 ---
 
-## 🔑 Uso de token
-
-Agregar en headers:
+### 🔐 Autenticación
 
 ```http
-Authorization: Bearer TU_TOKEN
+POST /api/auth/login
+```
+
+Genera un token JWT.
+
+---
+
+### 🛍️ Productos
+
+```http
+GET /api/products
+POST /api/products
+```
+
+Gestiona productos.
+
+---
+
+### 📦 Pedidos
+
+```http
+POST /api/orders
+```
+
+Crea un pedido (requiere token JWT).
+
+---
+
+## 🔑 Uso del token JWT
+
+Incluye el token en los encabezados de la solicitud:
+
+```http
+Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
 ---
 
-## ⚙️ Configuración
+## ⚙️ Variables de entorno
 
-Las credenciales se manejan mediante variables de entorno:
+La aplicación usa variables de entorno para las credenciales de la base de datos.
 
 ```properties
 spring.datasource.url=${DB_URL}
@@ -82,17 +140,25 @@ spring.datasource.password=${DB_PASSWORD}
 
 ---
 
-## 🧠 Características
+## 🧠 Funcionalidades
 
-* CRUD completo
-* Relaciones entre entidades
-* Validación de stock
-* Autenticación con JWT
-* Contraseñas encriptadas con BCrypt
-* API desplegada en la nube
+- Operaciones CRUD
+- Autenticación JWT
+- Cifrado de contraseñas con BCrypt
+- Integración con base de datos PostgreSQL
+- Relaciones entre entidades
+- Validación de stock
+- Arquitectura de API RESTful
+- Despliegue en la nube con Render
 
 ---
 
 ## 📌 Autor
 
 **Johan Moreno**
+
+🔗 GitHub:  
+https://github.com/JohanRandom
+
+🔗 LinkedIn:  
+https://www.linkedin.com/in/janmoreno-dev/
