@@ -1,0 +1,96 @@
+package com.johan.ecommerce.service.security;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+
+/**
+ * Filtro que protege endpoints privados validando el token JWT del header Authorization.
+ */
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+
+    private final JwtUtil jwtUtil;
+
+    public JwtFilter(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
+
+        String origin = request.getHeader("Origin");
+
+        if (
+                "http://localhost:5173".equals(origin) ||
+                        "https://ecommerce-web-gamma-one.vercel.app".equals(origin)
+        ) {
+
+            response.setHeader(
+                    "Access-Control-Allow-Origin",
+                    origin
+            );
+        }
+
+        response.setHeader(
+                "Access-Control-Allow-Methods",
+                "GET, POST, PUT, DELETE, OPTIONS"
+        );
+
+        response.setHeader(
+                "Access-Control-Allow-Headers",
+                "Authorization, Content-Type"
+        );
+
+        response.setHeader(
+                "Access-Control-Allow-Credentials",
+                "true"
+        );
+
+        if (request.getMethod().equals("OPTIONS")) {
+
+            response.setStatus(HttpServletResponse.SC_OK);
+
+            return;
+        }
+
+        String path = request.getRequestURI();
+
+        // Rutas publicas que no requieren token.
+        if (
+                path.contains("/") || path.contains("/api/auth") || path.contains("/api/users") || path.contains("/api/products")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token requerido");
+            return;
+        }
+
+        String token = authHeader.substring(7);
+
+        try {
+            String email = jwtUtil.extractEmail(token);
+            // El controlador de ordenes usa este dato para asociar la compra al usuario.
+            request.setAttribute("userEmail", email);
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token inválido");
+            return;
+        }
+
+        filterChain.doFilter(request, response);
+    }
+}
