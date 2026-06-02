@@ -1,26 +1,36 @@
-# 🛒 API de E-commerce
+# API de E-commerce
 
-API REST desarrollada con **Spring Boot** para gestionar usuarios, productos y pedidos con autenticación segura mediante **JWT**.
+API REST desarrollada con **Spring Boot** para gestionar usuarios, productos y pedidos con autenticación segura mediante
+**JWT**.
 
 ---
 
-## 🚀 Demo en vivo
+## Demo en vivo
 
-🌐 URL base de la API:  
+### API
+
 https://ecommerce-api-ln7m.onrender.com
+
+### Frontend
+
+https://ecommerce-web-gamma-one.vercel.app/
+
+### Repositorios
+
+https://github.com/JohanRandom/ecommerce-web
 
 ### Verificación de estado
 
 ```json
 {
-  "message": "E-commerce API is running successfully 🚀",
+  "message": "E-commerce API is running successfully",
   "status": "online"
 }
 ```
 
 ---
 
-## 🧰 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - Java 17
 - Spring Boot
@@ -33,7 +43,7 @@ https://ecommerce-api-ln7m.onrender.com
 
 ---
 
-## 🔐 Autenticación
+## Autenticación
 
 La API usa autenticación JWT para proteger los endpoints privados.
 
@@ -62,7 +72,7 @@ POST /api/auth/login
 
 ---
 
-## 👤 Usuario de prueba
+## Usuario de prueba
 
 Puedes probar la API usando esta cuenta de demostración:
 
@@ -75,9 +85,9 @@ Puedes probar la API usando esta cuenta de demostración:
 
 ---
 
-## 📦 Endpoints principales
+## Endpoints principales
 
-### 👤 Usuarios
+### Usuarios
 
 ```http
 POST /api/users
@@ -87,7 +97,7 @@ Crea un nuevo usuario.
 
 ---
 
-### 🔐 Autenticación
+### Autenticación
 
 ```http
 POST /api/auth/login
@@ -97,7 +107,7 @@ Genera un token JWT.
 
 ---
 
-### 🛍️ Productos
+### Productos
 
 ```http
 GET /api/products
@@ -108,7 +118,7 @@ Gestiona productos.
 
 ---
 
-### 📦 Pedidos
+### Pedidos
 
 ```http
 POST /api/orders
@@ -118,7 +128,7 @@ Crea un pedido (requiere token JWT).
 
 ---
 
-## 🔑 Uso del token JWT
+## Uso del token JWT
 
 Incluye el token en los encabezados de la solicitud:
 
@@ -128,7 +138,7 @@ Authorization: Bearer YOUR_JWT_TOKEN
 
 ---
 
-## ⚙️ Variables de entorno
+## Variables de entorno
 
 La aplicación usa variables de entorno para las credenciales de la base de datos.
 
@@ -140,7 +150,7 @@ spring.datasource.password=${DB_PASSWORD}
 
 ---
 
-## 🧠 Funcionalidades
+## Funcionalidades
 
 - Operaciones CRUD
 - Autenticación JWT
@@ -153,12 +163,12 @@ spring.datasource.password=${DB_PASSWORD}
 
 ---
 
-## 📌 Autor
+## Autor
 
 **Johan Moreno**
 
-🔗 GitHub:  
+GitHub:  
 https://github.com/JohanRandom
 
-🔗 LinkedIn:  
+LinkedIn:  
 https://www.linkedin.com/in/janmoreno-dev/
